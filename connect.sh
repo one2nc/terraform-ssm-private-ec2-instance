@@ -2,16 +2,6 @@
 
 #!/bin/bash
 
-# Prompt user for inputs
-echo "Enter Instance Name:"
-read INSTANCE_NAME
-echo "Enter AWS Region:"
-read REGION
-echo "Enter Instance Port:"
-read INSTANCE_PORT
-echo "Enter Local Port:"
-read LOCAL_PORT
-
 export AWS_REGION=$REGION
 
 # Get the instance ID using the provided name

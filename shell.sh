@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# Prompt user for inputs
-echo "Enter Instance Name:"
-read INSTANCE_NAME
-echo "Enter AWS Region:"
-read REGION
 
 
 export AWS_REGION=$REGION
