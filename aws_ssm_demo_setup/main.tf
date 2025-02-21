@@ -6,13 +6,14 @@ provider "aws" {
 locals {
   services = {
     "ec2messages" : {
-      "name" : "ssm.ap-south-1.amazonaws.com"
+      "name" : "com.amazonaws.ap-south-1.ec2messages"
     },
     "ssm" : {
-      "name" : "ssmmessages.ap-south-1.amazonaws.com"
+      "name" : "com.amazonaws.ap-south-1.ssm"
+
     },
     "ssmmessages" : {
-      "name" : "ec2messages.ap-south-1.amazonaws.com"
+      "name" : "com.amazonaws.ap-south-1.ssmmessages"
     }
   }
 }
@@ -161,7 +162,7 @@ resource "aws_instance" "private_ec2" {
   security_groups      = [aws_security_group.private_sg.id]
   iam_instance_profile = aws_iam_instance_profile.ssm_instance_profile.name
   user_data = file("./user_data.sh")
-
+  depends_on = [aws_nat_gateway.nat, aws_vpc_endpoint.ssm_endpoint["ssm"], aws_vpc_endpoint.ssm_endpoint["ec2messages"], aws_vpc_endpoint.ssm_endpoint["ssmmessages"]]
   tags = {
     Name = "PrivateWebServer"
   }
